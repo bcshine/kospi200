@@ -1,0 +1,236 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f5f5f5;
+    color: #333;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 30px;
+    width: 95%;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #2c3e50;
+    font-size: 28px;
+}
+
+.controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+#refresh-btn {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#refresh-btn:hover {
+    background-color: #2980b9;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.stats {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.stat-item {
+    background-color: white;
+    padding: 18px;
+    border-radius: 8px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    min-width: 220px;
+    flex: 1;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-top: 3px solid #3498db;
+}
+
+.stat-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.stat-label {
+    font-weight: bold;
+    margin-right: 5px;
+    color: #7f8c8d;
+}
+
+.message {
+    text-align: center;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    display: none;
+}
+
+#loading-message {
+    background-color: #f9f9f9;
+}
+
+#error-message {
+    background-color: #ffecec;
+    color: #e74c3c;
+}
+
+#no-data-message {
+    background-color: #f8f9fa;
+    color: #7f8c8d;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    display: none;
+    margin-bottom: 30px;
+    table-layout: fixed;
+}
+
+thead {
+    background-color: #3498db;
+    color: white;
+    position: sticky;
+    top: 0;
+}
+
+th, td {
+    padding: 12px 8px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* 첫 번째와 두 번째 열(종목명, 티커)은 왼쪽 정렬 */
+td:nth-child(1),
+td:nth-child(2) {
+    text-align: left;
+}
+
+/* 열 너비 조정 */
+th:nth-child(1), td:nth-child(1) { width: 15%; } /* 종목명 */
+th:nth-child(2), td:nth-child(2) { width: 8%; } /* 티커 */
+th:nth-child(3), td:nth-child(3) { width: 12%; } /* 산업군 */
+th:nth-child(4), td:nth-child(4),
+th:nth-child(5), td:nth-child(5),
+th:nth-child(6), td:nth-child(6),
+th:nth-child(7), td:nth-child(7),
+th:nth-child(8), td:nth-child(8),
+th:nth-child(9), td:nth-child(9) { width: 9%; } /* RSI 관련 열 */
+
+th {
+    font-weight: bold;
+    white-space: nowrap;
+    position: relative;
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.2s;
+}
+
+th.sortable:hover {
+    background-color: #2980b9;
+}
+
+th.sortable::after {
+    content: '⇅';
+    display: inline-block;
+    margin-left: 5px;
+    opacity: 0.5;
+    font-size: 0.8em;
+}
+
+th.sort-asc::after {
+    content: '↑';
+    opacity: 1;
+}
+
+th.sort-desc::after {
+    content: '↓';
+    opacity: 1;
+}
+
+tbody tr:hover {
+    background-color: #f0f7fc;
+}
+
+.positive-change {
+    color: #27ae60;
+    font-weight: bold;
+    background-color: rgba(39, 174, 96, 0.05);
+}
+
+.negative-change {
+    color: #e74c3c;
+    font-weight: bold;
+    background-color: rgba(231, 76, 60, 0.05);
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+        width: 100%;
+    }
+    
+    h1 {
+        font-size: 24px;
+    }
+    
+    table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+    
+    th, td {
+        padding: 6px 4px;
+        font-size: 12px;
+    }
+    
+    .stat-item {
+        min-width: 150px;
+        margin: 5px;
+        padding: 12px;
+    }
+    
+    .controls {
+        flex-direction: column;
+        gap: 10px;
+    }
+} 
