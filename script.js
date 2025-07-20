@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const totalStocks = document.getElementById('total-stocks');
     const avgRsi = document.getElementById('avg-rsi');
     const lastUpdate = document.getElementById('last-update');
+    const refreshDate = document.getElementById('refresh-date');
     const loadingMessage = document.getElementById('loading-message');
     const errorMessage = document.getElementById('error-message');
     const noDataMessage = document.getElementById('no-data-message');
@@ -22,6 +23,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // 초기 데이터 로드
     loadData();
+    
+    // 초기 새로고침 날짜 설정
+    updateLastUpdated();
 
     // 이벤트 리스너 설정
     refreshBtn.addEventListener('click', loadData);
@@ -253,7 +257,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // 마지막 업데이트 시간 설정
     function updateLastUpdated() {
         const now = new Date();
-        lastUpdate.textContent = now.toLocaleString('ko-KR');
+        const formattedDate = now.toLocaleString('ko-KR');
+        lastUpdate.textContent = formattedDate;
+        refreshDate.textContent = `최종 업데이트: ${formattedDate}`;
     }
 
     // 날짜 포맷팅 함수
@@ -296,4 +302,4 @@ document.addEventListener('DOMContentLoaded', function() {
         noDataMessage.style.display = 'none';
         resultsTable.style.display = 'block';
     }
-}); 
+});

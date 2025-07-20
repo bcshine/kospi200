@@ -55,6 +55,13 @@ h1 {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
+.refresh-date {
+    margin-left: 15px;
+    font-size: 14px;
+    color: #7f8c8d;
+    font-weight: 500;
+}
+
 .stats {
     display: flex;
     justify-content: space-around;
@@ -233,4 +240,4 @@ tbody tr:hover {
         flex-direction: column;
         gap: 10px;
     }
-} 
+}
